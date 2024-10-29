@@ -7,6 +7,7 @@ import { UserHistoryComponent } from './user-history/user-history.component';
 import {PlayGameComponent} from "./play-game/play-game.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {ShareModule} from "./core/module/share.module";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgbModule
+    ShareModule
   ],
   providers: [],
   bootstrap: [AppComponent]
