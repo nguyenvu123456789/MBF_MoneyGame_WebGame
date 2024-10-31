@@ -12,7 +12,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./services/auth.interceptor";
 import { LoginComponent } from './login/login.component';
 import {RouterModule} from "@angular/router";
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,6 @@ import { FormsModule } from '@angular/forms';
     LoginComponent
   ],
   imports: [
-    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
