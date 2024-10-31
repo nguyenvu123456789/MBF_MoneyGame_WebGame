@@ -1,0 +1,9 @@
+<form [formGroup]="loginForm">
+
+<h2>Login</h2>
+<div>
+  Msisdn: <input type="text" formControlName="msisdn">
+  Password: <input type="password" formControlName="password">
+  <input type="submit" (click)="login()">
+</div>
+</form>
