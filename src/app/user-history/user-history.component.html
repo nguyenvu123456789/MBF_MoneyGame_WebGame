@@ -1,1 +1,37 @@
-<p>user-history works!</p>
+<div class="user-history-container">
+  <h2>Lịch sử người dùng</h2>
+
+  <div class="date-filters">
+    <mat-form-field appearance="fill">
+      <mat-label>Từ Ngày</mat-label>
+      <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="startDate" (ngModelChange)="fetchUserHistory()">
+      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Đến Ngày</mat-label>
+      <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="endDate" (ngModelChange)="fetchUserHistory()">
+      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div *ngFor="let dateGroup of groupedHistory">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ dateGroup.date | date: 'dd MMMM yyyy' }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div *ngFor="let history of dateGroup.items" class="history-item">
+        <mat-icon>star</mat-icon>
+        <div class="history-content">
+          <p class="prize-name">{{ history.prizeName || 'Chúc bạn may mắn lần sau' }}</p>
+          <p class="time">{{ history.modifiedAt | date: 'HH:mm' }}</p>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</div>
