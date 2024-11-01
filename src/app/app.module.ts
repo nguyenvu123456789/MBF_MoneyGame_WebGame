@@ -13,13 +13,17 @@ import {AuthInterceptor} from "./services/auth.interceptor";
 import { LoginComponent } from './login/login.component';
 import {RouterModule} from "@angular/router";
 import { FormsModule } from '@angular/forms';
+import {MatIconModule} from "@angular/material/icon";
+import {DatePipe} from "@angular/common";
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserHistoryComponent,
     PlayGameComponent,
-    LoginComponent
+    LoginComponent,
+    ModalComponent
   ],
   imports: [
     FormsModule,
@@ -27,11 +31,14 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     RouterModule,
+    MatIconModule,
+    NgbModule,
     ShareModule,
     HttpClientModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}
+    {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},
+    [DatePipe]
   ],
   bootstrap: [AppComponent]
 })
