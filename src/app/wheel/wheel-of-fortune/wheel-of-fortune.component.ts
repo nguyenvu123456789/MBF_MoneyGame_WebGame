@@ -10,6 +10,7 @@ import {
 import { Sector } from '../sector.model';
 import { GameHistoryService } from 'src/app/services/data/game-history.service';
 import { AuthService } from 'src/app/services/data/auth.service';
+import { AppComponent } from 'src/app/app.component';
 
 const EMPTY_SECTOR: Sector = {
   id: '',
@@ -50,7 +51,8 @@ export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
 
   constructor(
     private gh: GameHistoryService,
-    private authService: AuthService
+    private authService: AuthService,
+    protected appComponent: AppComponent
   ) {}
 
   ngAfterViewInit(): void {
@@ -242,6 +244,10 @@ export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
 
             this.spinClick.emit();
           }
+        },
+        error: (err) => {
+          this.appComponent.showAlert('danger', err);
+          console.log('err', err);
         },
       });
   }
