@@ -1,7 +1,6 @@
   /* Căn chỉnh và định dạng phần header */
   .header {
     display: flex;
-    align-items: center;
     width: 100%;
     border-radius: 10px;
     padding: 10px;
@@ -184,7 +183,7 @@
     color: #ffffff;
     font-weight: bold;
     font-size: 28px;
-    margin-top: 20px;
+    margin: 0;
   }
   .main-container {
     background-color: #66B2FF;

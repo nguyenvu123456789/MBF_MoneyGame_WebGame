@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import {MatIconModule} from "@angular/material/icon";
 import {DatePipe} from "@angular/common";
 import { ModalComponent } from './modal/modal.component';
+import {WheelOfFortuneModule} from "./wheel/wheel-of-fortune.module";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ModalComponent } from './modal/modal.component';
     RouterModule,
     MatIconModule,
     NgbModule,
+    WheelOfFortuneModule,
     ShareModule,
     HttpClientModule
   ],

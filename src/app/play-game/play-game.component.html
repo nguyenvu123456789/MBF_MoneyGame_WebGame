@@ -6,12 +6,13 @@
       <p>Số điện thoại : {{ msisdn }}</p>
     </div>
   </div>
-  <h2 class="game-title">{{game.nameGame}}</h2>
+  <h2 class="game-title">{{ game.nameGame }}</h2>
   <div class="wheel-container text-center p-3">
     <dft-wheel-of-fortune
       [font]="game.fontType"
-    [fontSize]="game.fontSize"
-    [borderColor]="game.borderColor"></dft-wheel-of-fortune>
+      [fontSize]="game.fontSize"
+      [borderColor]="game.borderColor">
+    </dft-wheel-of-fortune>
     <p class="mt-3">
       Bạn còn <span class="spin-count">{{ remainingPlays }}</span> lượt chơi
     </p>
@@ -27,7 +28,9 @@
           <p class="mission-description">Giải thưởng x 1 lượt quay, tối đa 1 lần/ngày</p>
         </div>
       </div>
-      <button mat-raised-button color="accent" class="mission-button" [disabled]="checkedIn" (click)="doTaskLogin()">Thực hiện</button>
+      <button mat-raised-button color="accent" class="mission-button" [disabled]="checkedIn" (click)="doTaskLogin()">
+        Thực hiện
+      </button>
     </div>
   </div>
 
@@ -54,16 +57,16 @@
       </div>
     </div>
   </ng-template>
-<div class="footer-container">
-  <div class="footer-buttons d-flex justify-content-around mt-4">
-    <button mat-raised-button color="accent" class="footer-button" (click)="viewReceivedPrizes(giftsModal)">
-      <mat-icon>card_giftcard</mat-icon>
-      Quà đã nhận
-    </button>
-    <button mat-raised-button color="accent" class="footer-button" (click)="viewHistory()">
-      <mat-icon>history</mat-icon>
-      Lịch sử
-    </button>
+  <div class="footer-container">
+    <div class="footer-buttons d-flex justify-content-around mt-4">
+      <button mat-raised-button color="accent" class="footer-button" (click)="viewReceivedPrizes(giftsModal)">
+        <mat-icon>card_giftcard</mat-icon>
+        Quà đã nhận
+      </button>
+      <button mat-raised-button color="accent" class="footer-button" (click)="viewHistory()">
+        <mat-icon>history</mat-icon>
+        Lịch sử
+      </button>
+    </div>
   </div>
-</div>
 </div>
