@@ -1,13 +1,26 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Sector } from '../sector.model';
+import { GameHistoryService } from 'src/app/services/data/game-history.service';
+import { AuthService } from 'src/app/services/data/auth.service';
 
-const EMPTY_SECTOR: Sector = { id: '', color: '#496BE7', label: 'Chúc bạn may mắn lần sau' };
-
+const EMPTY_SECTOR: Sector = {
+  id: '',
+  color: '#496BE7',
+  label: 'Chúc bạn may mắn lần sau',
+};
 
 @Component({
   selector: 'dft-wheel-of-fortune',
   templateUrl: './wheel-of-fortune.component.html',
-  styleUrls: ['./wheel-of-fortune.component.scss']
+  styleUrls: ['./wheel-of-fortune.component.scss'],
 })
 export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
   @Input() prizes: Sector[] = [];
@@ -17,6 +30,7 @@ export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
   @Input() spinButtonColor = '#748CE3';
   @Input() spinDuration = 10; // seconds
   @Input() spinSound = 'assets/sound/wheel.wav';
+  @Input() gameId: number = 0;
 
   @Output() spinFinished = new EventEmitter<string>();
   @Output() spinClick = new EventEmitter<void>();
@@ -33,6 +47,11 @@ export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
   private ctx!: CanvasRenderingContext2D;
   private tot = 0;
   private spinAudio: HTMLAudioElement | null = null;
+
+  constructor(
+    private gh: GameHistoryService,
+    private authService: AuthService
+  ) {}
 
   ngAfterViewInit(): void {
     this.setupCanvas();
@@ -51,9 +70,9 @@ export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
 
     if (changes['prizes'] || changes['font'] || changes['fontSize']) {
       const arr: Sector[] = [];
-      this.prizes.forEach(sector => {
+      this.prizes.forEach((sector) => {
         arr.push(sector);
-        arr.push(EMPTY_SECTOR)
+        arr.push(EMPTY_SECTOR);
       });
       this.sectors = arr;
       this.tot = this.sectors.length;
@@ -94,22 +113,27 @@ export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
 
     // TEXT
     this.ctx.save();
-    this.ctx.translate(centerX + rad * Math.cos(ang + this.arc / 2), centerY + rad * Math.sin(ang + this.arc / 2));
+    this.ctx.translate(
+      centerX + rad * Math.cos(ang + this.arc / 2),
+      centerY + rad * Math.sin(ang + this.arc / 2)
+    );
     this.ctx.rotate(ang + this.arc / 2 + this.PI / 2);
     this.ctx.textAlign = 'center';
     this.ctx.fillStyle = sector.id ? '#000000' : '#FFFFFF';
-    this.ctx.font = `bold ${this.fontSize * canvas.width / 266}px ${this.font}`;
+    this.ctx.font = `bold ${(this.fontSize * canvas.width) / 266}px ${
+      this.font
+    }`;
     const text = sector.label ?? '';
-    const lineheight = this.fontSize * canvas.width / 266;
+    const lineheight = (this.fontSize * canvas.width) / 266;
 
     const lines = [];
-    const maxLength = 0.8 * 2 * rad * Math.sin(this.arc / 2) / lineheight;
+    const maxLength = (0.8 * 2 * rad * Math.sin(this.arc / 2)) / lineheight;
 
     const words = text.split(' ');
     let currentLine = '';
 
-    words.forEach(word => {
-      if ((currentLine.length + word.length + 1) > maxLength) {
+    words.forEach((word) => {
+      if (currentLine.length + word.length + 1 > maxLength) {
         lines.push(currentLine.trim());
         currentLine = word;
       } else {
@@ -133,15 +157,24 @@ export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
     if (sector.url) {
       const img = new Image();
       img.src = sector.url;
-      img.width = 40 * canvas.width / 266;
-      img.height = 40 * canvas.height / 266;
+      img.width = (40 * canvas.width) / 266;
+      img.height = (40 * canvas.height) / 266;
 
       img.onload = () => {
         this.ctx.save();
         // Center the image at the middle of the sector
-        this.ctx.translate(centerX + rad * Math.cos(ang + this.arc / 2), centerY + rad * Math.sin(ang + this.arc / 2));
+        this.ctx.translate(
+          centerX + rad * Math.cos(ang + this.arc / 2),
+          centerY + rad * Math.sin(ang + this.arc / 2)
+        );
         this.ctx.rotate(ang + this.arc / 2 + this.PI / 2);
-        this.ctx.drawImage(img, -img.width / 2, 0.3 * rad, img.width, img.height);
+        this.ctx.drawImage(
+          img,
+          -img.width / 2,
+          0.3 * rad,
+          img.width,
+          img.height
+        );
         this.ctx.restore();
       };
     }
@@ -198,19 +231,32 @@ export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
     if (this.angVel) {
       return;
     }
+    const userLoggedIn = this.authService.getUserInfo();
+    this.gh
+      .apiPlayGame({ gameId: this.gameId, msisdn: userLoggedIn.msisdn })
+      .subscribe({
+        next: (res) => {
+          if (res.code === 0) {
+            const prizeId = res.body.prizeId;
+            this.spinToSector(prizeId.toString());
 
-    this.spinClick.emit();
+            this.spinClick.emit();
+          }
+        },
+      });
   }
 
   public spinToSector(id: string): void {
     let targetIndex = -1;
     if (!id) {
       // spin to random empty sector
-      const emptySectors = this.sectors.filter(sector => !sector.id);
+      const emptySectors = this.sectors.filter((sector) => !sector.id);
       const randomIndex = Math.floor(Math.random() * emptySectors.length);
-      targetIndex = this.sectors.findIndex(sector => sector === emptySectors[randomIndex]);
+      targetIndex = this.sectors.findIndex(
+        (sector) => sector === emptySectors[randomIndex]
+      );
     } else {
-      targetIndex = this.sectors.findIndex(sector => sector.id === id);
+      targetIndex = this.sectors.findIndex((sector) => sector.id === id);
     }
 
     if (targetIndex === -1) {
@@ -266,7 +312,10 @@ export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
 
     for (let i = 0; i < data.length - 1; i++) {
       if (y >= data[i].y && y <= data[i + 1].y) {
-        const x = data[i].x + ((data[i + 1].x - data[i].x) * (y - data[i].y)) / (data[i + 1].y - data[i].y);
+        const x =
+          data[i].x +
+          ((data[i + 1].x - data[i].x) * (y - data[i].y)) /
+            (data[i + 1].y - data[i].y);
         return x;
       }
 

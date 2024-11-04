@@ -1,15 +1,15 @@
 export interface IPrize {
   id: number;
-  name: string;
+  prizeName: string;
   quantity: number;
-  format: string,
-  price: number,
-  totalPrice: number,
-  remainingPrice: number,
-  image: string,
-  colorCode: string,
-  gameId: number,
-  gameName: string
+  format: string;
+  price: number;
+  totalPrice: number;
+  remainingPrice: number;
+  image: string;
+  colorCode: string;
+  gameId: number;
+  gameName: string;
 }
 
 // GameResponse interface
