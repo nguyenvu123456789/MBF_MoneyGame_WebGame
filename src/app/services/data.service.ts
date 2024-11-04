@@ -16,7 +16,7 @@ export class DataService {
   private apiUrl='http://localhost:8080';
   constructor(private http: HttpClient) { }
 
-  get<T>(url: string, params: {}, config?:{}): Observable<Response<T>>{
+  get<T>(url: string, params?: {}, config?:{}): Observable<Response<T>>{
     return this.http
       .get<Response<T>>(`${this.apiUrl}/${url}`, {params, ...config})
       .pipe(catchError((err)=>this.handleError(err)));

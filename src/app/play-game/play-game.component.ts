@@ -11,6 +11,8 @@ import {AuthService} from "../services/data/auth.service";
 import {ModalComponent} from "../modal/modal.component";
 import {DomSanitizer} from "@angular/platform-browser";
 import {AppComponent} from "../app.component";
+import {IGame} from "../interfaces/game";
+import {GameService} from "../services/data/game.service";
 
 @Component({
   selector: 'app-play-game',
@@ -24,18 +26,27 @@ export class PlayGameComponent implements OnInit {
   receivedPrizes: any[] = [];
   remainingPlays: number | undefined;
   checkedIn!: boolean ;
+  game!: IGame;
   constructor(protected gameHistoryService: GameHistoryService,
               protected modalService: NgbModal,
               protected datePipe: DatePipe,
               protected router: Router,
               protected taskLoginService:TaskLoginService,
               protected authService: AuthService,
+              protected gameService: GameService,
               protected appComponent:AppComponent) {
   }
 
   ngOnInit(): void {
     const userLoggedIn = this.authService.getUserInfo();
     this.getUserInfo(userLoggedIn.msisdn);
+    this.getGame();
+  }
+
+  getGame(){
+    this.gameService.getActiveGame().subscribe((res)=>{
+      this.game = res.body;
+    })
   }
 
   getUserInfo(msisdn: string) {
