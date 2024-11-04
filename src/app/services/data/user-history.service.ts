@@ -9,6 +9,6 @@ export class UserHistoryService {
   constructor(private http: DataService) {}
 
   apiGetPrizesByUser(data: any) {
-    return this.http.post<IUserHistory>('game-history/searchUserPrizes', data);
+    return this.http.post<IUserHistory>('game-history/user-prizes', data);
   }
 }
