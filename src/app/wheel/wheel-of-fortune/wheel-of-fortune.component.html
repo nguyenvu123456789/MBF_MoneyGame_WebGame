@@ -1,0 +1,9 @@
+<div id="wheel-of-fortune">
+    <div class="wheel-border-1" [ngStyle]="{ backgroundColor: borderColor }"></div>
+    <div class="wheel-border-2"></div>
+    <canvas id="wheel" width="1200" height="1200" style="width: 266px;"></canvas>
+    <div id="spin" (click)="spin()" [ngStyle]="{ background: spinButtonColor }">
+        <div class="triangle"></div>
+        Quay
+    </div>
+</div>
