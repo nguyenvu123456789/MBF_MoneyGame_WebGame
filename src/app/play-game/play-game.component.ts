@@ -133,4 +133,18 @@ export class PlayGameComponent implements OnInit {
     const userLoggedIn = this.authService.getUserInfo();
     this.getUserInfo(userLoggedIn.msisdn);
   }
+
+  onWheelClick() {
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+    const currentMinute = currentTime.getMinutes();
+
+    if((currentHour === 23 && currentMinute>=1) ||
+      currentHour < 8 ){
+      const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.title = 'Thông báo';
+      modalRef.componentInstance.message = 'Thời gian quay từ 08:00 đến 23:00 <br> Vui lòng quay lại sau!';
+      modalRef.componentInstance.icon = 'info';
+    }
+  }
 }
