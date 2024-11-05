@@ -1,7 +1,7 @@
 <div class="user-history-container">
   <div class="header">
     <button mat-icon-button class="back-button" [routerLink]="['/play']">
-      <mat-icon>arrow_back</mat-icon>
+      <mat-icon>arrow_back_ios</mat-icon>
     </button>
     <h2>Lịch sử</h2>
   </div>
@@ -34,7 +34,7 @@
       </mat-expansion-panel-header>
 
       <div *ngFor="let history of dateGroup.items" class="history-item">
-        <mat-icon>star</mat-icon>
+        <mat-icon>data_saver_off</mat-icon>
         <div class="history-content">
           <p class="prize-name">{{ history.prizeName || 'Chúc bạn may mắn lần sau' }}</p>
           <p class="time">{{ history.modifiedAt | date: 'HH:mm' }}</p>

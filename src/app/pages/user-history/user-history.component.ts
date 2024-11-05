@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserHistoryService } from '../services/data/user-history.service';
+import { UserHistoryService } from '../../services/data/user-history.service';
 import { ActivatedRoute } from '@angular/router';
 import { IUserHistory } from 'src/app/interfaces/user-history';
 import { DatePipe } from '@angular/common';

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PlayGameComponent} from "./play-game/play-game.component";
+import { PlayGameComponent} from "./pages/play-game/play-game.component";
 import { LoginComponent} from "./login/login.component";
-import { UserHistoryComponent } from './user-history/user-history.component';
+import { UserHistoryComponent } from './pages/user-history/user-history.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 

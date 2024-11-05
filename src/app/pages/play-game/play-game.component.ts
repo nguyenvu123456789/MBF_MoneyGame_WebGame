@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { GameHistoryService } from '../services/data/game-history.service';
+import { GameHistoryService } from '../../services/data/game-history.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { TaskLoginService } from '../services/data/task-login.service';
-import { AuthService } from '../services/data/auth.service';
-import { ModalComponent } from '../modal/modal.component';
-import { AppComponent } from '../app.component';
-import { IGame, IPrize } from '../interfaces/game';
-import { GameService } from '../services/data/game.service';
-import { Sector } from '../wheel/sector.model';
-import { PrizeService } from "../services/data/prize.service";
+import { TaskLoginService } from '../../services/data/task-login.service';
+import { AuthService } from '../../services/data/auth.service';
+import { ModalComponent } from '../../modal/modal.component';
+import { AppComponent } from '../../app.component';
+import { IGame, IPrize } from '../../interfaces/game';
+import { GameService } from '../../services/data/game.service';
+import { Sector } from '../../wheel/sector.model';
+import { PrizeService } from "../../services/data/prize.service";
 
 @Component({
   selector: 'app-play-game',
@@ -146,6 +146,7 @@ export class PlayGameComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['login']);
   }
 
   onWheelClick() {

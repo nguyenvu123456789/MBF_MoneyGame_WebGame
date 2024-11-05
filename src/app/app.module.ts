@@ -4,8 +4,8 @@ import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserHistoryComponent } from './user-history/user-history.component';
-import {PlayGameComponent} from "./play-game/play-game.component";
+import { UserHistoryComponent } from './pages/user-history/user-history.component';
+import {PlayGameComponent} from "./pages/play-game/play-game.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ShareModule} from "./core/module/share.module";
