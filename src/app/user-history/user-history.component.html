@@ -1,16 +1,21 @@
 <div class="user-history-container">
-  <h2>Lịch sử người dùng</h2>
+  <div class="header">
+    <button mat-icon-button class="back-button" [routerLink]="['/play']">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>Lịch sử</h2>
+  </div>
 
   <div class="date-filters">
     <mat-form-field appearance="fill">
-      <mat-label>Từ Ngày</mat-label>
+      <mat-label>Từ ngày</mat-label>
       <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="startDate" (ngModelChange)="fetchUserHistory()">
       <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
       <mat-datepicker #startDatePicker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Đến Ngày</mat-label>
+      <mat-label>Đến ngày</mat-label>
       <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="endDate" (ngModelChange)="fetchUserHistory()">
       <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
       <mat-datepicker #endDatePicker></mat-datepicker>
@@ -21,7 +26,10 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ dateGroup.date | date: 'dd MMMM yyyy' }}
+          <ng-container *ngIf="dateGroup.date">
+            <span class="date-day">{{ dateGroup.date | date: 'dd' }}</span>
+            <span class="date-month-year">tháng {{ dateGroup.date | date: 'MM' }} năm {{ dateGroup.date | date: 'yyyy' }}</span>
+          </ng-container>
         </mat-panel-title>
       </mat-expansion-panel-header>
 
