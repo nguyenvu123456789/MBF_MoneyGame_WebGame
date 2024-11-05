@@ -56,7 +56,7 @@ export class PlayGameComponent implements OnInit {
         id: prize.id.toString(),
         color: prize.colorCode,
         label: prize.prizeName,
-        url: prize.image,
+        url: 'assets/images/prizes/'+prize.image,
       }));
       console.log(this.sector);
     });
@@ -135,6 +135,7 @@ export class PlayGameComponent implements OnInit {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.title = 'Chúc mừng';
         modalRef.componentInstance.image = this.prize?.image;
+        modalRef.componentInstance.message= this.prize.prizeName;
       });
     }
   }

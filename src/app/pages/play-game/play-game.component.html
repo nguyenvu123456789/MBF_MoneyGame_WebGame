@@ -17,7 +17,7 @@
 
 
 
-  <h2 class="game-title">{{ game.nameGame }}</h2>
+  <h2 class="game-title">{{ game?.nameGame }}</h2>
   <div class="wheel-container text-center p-3">
     <dft-wheel-of-fortune [gameId]="game.id" [prizes]="sector" [font]="game.fontType" [fontSize]="game.fontSize"
       [borderColor]="game.borderColor" [spinButtonColor]="game.borderColor" [spinDuration]="game.timeSpin"

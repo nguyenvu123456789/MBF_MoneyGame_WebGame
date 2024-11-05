@@ -16,24 +16,13 @@
 .modal-header {
   position: absolute;
   top: -7%;
+  border-bottom: none;
 }
 
 .close-button {
-  top: 10px;
-  right: 10px;
-  border: none;
+  top: 1vh;
+  right: 1vh;
   cursor: pointer;
-}
-
-.modal-body {
-  padding: 10px;
-  max-height: 300px;
-  overflow-y: auto;
-  width: 100%;
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column; /* Để xếp chồng icon và text */
-  align-items: center; /* Căn giữa tất cả các thành phần theo chiều ngang */
 }
 
 .icon-container {
@@ -43,6 +32,18 @@
   margin-bottom: 10px; /* Khoảng cách giữa icon và text */
 }
 
+.image-container{
+  width: 100%;
+  background-color: #cfdeef;
+  align-items: center;
+}
+
+
+.item-image{
+  width: 30%;
+  border-radius: 5px;
+  margin: 15px;
+}
 .check-icon {
   color: #007bff;
   font-size: 100px;
@@ -51,6 +52,7 @@
   background-color: #ffffff;
   text-align: center;
 }
+
 .spin-count {
   color: #007bff;
 }
