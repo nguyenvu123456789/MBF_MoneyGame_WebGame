@@ -1,15 +1,29 @@
-<div class="modal-wrapper">
-  <div class="modal-content">
-    <div class="modal-header">
-      <p class="modal-title">{{ title }}</p>
+<div class="modal-wrapper d-flex">
+  <div class="modal-content bg-white rounded-4 p-2 m-auto justify-content-center align-items-center">
+    <div class="modal-header d-flex justify-content-center pb-4 bg-white rounded-5 w-75">
+      <p class="fw-bold text-center text-dark fs-5">{{ title }}</p>
     </div>
-    <button type="button" class="close-button" aria-label="Close" (click)="closeModal()">
+    <button type="button" class="close-button fs-3 rounded-circle text-secondary position-absolute" aria-label="Close" (click)="closeModal()">
       <span aria-hidden="true">&times;</span>
     </button>
     <div class="modal-body">
       <div class="icon-container">
-        <mat-icon class="check-icon" *ngIf="icon">{{ icon }}</mat-icon>
+        <ng-container *ngIf="image; else iconTemplate">
+          <img [src]="'assets/images/prizes/'+image" alt="image" class="prize-image">
+        </ng-container>
+        <ng-template #iconTemplate>
+          <mat-icon class="check-icon" *ngIf="icon">{{ icon }}</mat-icon>
+        </ng-template>
       </div>
+        <ul *ngIf="items && items.length" class="prize-list">
+          <li class="prize-item" *ngFor="let prize of items">
+            <img class="prize-image" [src]="'assets/images/prizes/'+prize.image" alt="{{ prize.image }}">
+            <div class="prize-details">
+              <p class="prize-name">{{ prize.prizeName }}</p>
+              <p class="prize-time">{{ prize.receivedTime }}</p>
+            </div>
+          </li>
+        </ul>
       <div class="message">
         <p [innerHTML]="message"></p>
       </div>

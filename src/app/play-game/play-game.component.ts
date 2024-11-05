@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/data/user.service';
-import { GameHistoryService } from '../services/data/game-history.service';
-import { IReceivedPrize } from '../interfaces/received-prizes';
-import { IResponsePage } from '../interfaces/response-page';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DatePipe } from '@angular/common';
-import { Router } from '@angular/router';
-import { TaskLoginService } from '../services/data/task-login.service';
-import { AuthService } from '../services/data/auth.service';
-import { ModalComponent } from '../modal/modal.component';
-import { DomSanitizer } from '@angular/platform-browser';
-import { AppComponent } from '../app.component';
-import { IGame } from '../interfaces/game';
-import { GameService } from '../services/data/game.service';
-import { Sector } from '../wheel/sector.model';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../services/data/user.service';
+import {GameHistoryService} from '../services/data/game-history.service';
+import {IReceivedPrize} from '../interfaces/received-prizes';
+import {IResponsePage} from '../interfaces/response-page';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {DatePipe} from '@angular/common';
+import {Router} from '@angular/router';
+import {TaskLoginService} from '../services/data/task-login.service';
+import {AuthService} from '../services/data/auth.service';
+import {ModalComponent} from '../modal/modal.component';
+import {DomSanitizer} from '@angular/platform-browser';
+import {AppComponent} from '../app.component';
+import {IGame, IPrize} from '../interfaces/game';
+import {GameService} from '../services/data/game.service';
+import {Sector} from '../wheel/sector.model';
+import {PrizeService} from "../services/data/prize.service";
 
 @Component({
   selector: 'app-play-game',
@@ -30,6 +31,7 @@ export class PlayGameComponent implements OnInit {
   game!: IGame;
   sector: Sector[] = [];
   audioUrl: string = '';
+  prize: IPrize | undefined;
 
   constructor(
     protected gameHistoryService: GameHistoryService,
@@ -39,8 +41,10 @@ export class PlayGameComponent implements OnInit {
     protected taskLoginService: TaskLoginService,
     protected authService: AuthService,
     protected gameService: GameService,
+    protected prizeService: PrizeService,
     protected appComponent: AppComponent
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     const userLoggedIn = this.authService.getUserInfo();
@@ -75,7 +79,7 @@ export class PlayGameComponent implements OnInit {
     });
   }
 
-  viewReceivedPrizes(modal: any) {
+  viewReceivedPrizes() {
     if (!this.msisdn) {
       console.log('MSISDN is null');
       return;
@@ -96,7 +100,9 @@ export class PlayGameComponent implements OnInit {
           };
         });
 
-        this.modalService.open(modal, { size: 'lg' });
+        const modalRef = this.modalService.open(ModalComponent, {animation:false});
+        modalRef.componentInstance.title = 'Quà đã nhận';
+        modalRef.componentInstance.items = this.receivedPrizes;
       },
       (error) => {
         this.appComponent.showAlert('danger', error);
@@ -125,8 +131,20 @@ export class PlayGameComponent implements OnInit {
     modalRef.componentInstance.icon = 'check_circle';
   }
 
-  spinFinished(event: any) {
-    console.log(event);
+  spinFinished(result: any) {
+    if (result === 0) {
+      const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.title = 'Thông báo';
+      modalRef.componentInstance.icon = 'error_outline';
+      modalRef.componentInstance.message = 'Chúc bạn may mắn lần sau !!!';
+    } else {
+      this.prizeService.apiGetPrizeById(result).subscribe((res) => {
+        this.prize = res.body;
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.title = 'Chúc mừng';
+        modalRef.componentInstance.image = this.prize?.image;
+      })
+    }
   }
 
   spinClick() {
@@ -139,8 +157,8 @@ export class PlayGameComponent implements OnInit {
     const currentHour = currentTime.getHours();
     const currentMinute = currentTime.getMinutes();
 
-    if((currentHour === 23 && currentMinute>=1) ||
-      currentHour < 8 ){
+    if ((currentHour === 23 && currentMinute >= 1) ||
+      currentHour < 8) {
       const modalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.title = 'Thông báo';
       modalRef.componentInstance.message = 'Thời gian quay từ 08:00 đến 23:00 <br> Vui lòng quay lại sau!';

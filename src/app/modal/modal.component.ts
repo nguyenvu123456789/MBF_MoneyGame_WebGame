@@ -8,8 +8,10 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class ModalComponent {
   @Input() title: string ='';
-  @Input() message: string='';
-  @Input() icon: string ='';
+  @Input() message?: string='';
+  @Input() icon?: string ='';
+  @Input() image?: string ='';
+  @Input() items?: any[] = [];
   constructor(public activeModal: NgbActiveModal) {
   }
   closeModal(){

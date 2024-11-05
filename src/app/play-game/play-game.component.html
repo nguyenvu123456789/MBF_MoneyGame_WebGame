@@ -35,32 +35,9 @@
     </div>
   </div>
 
-  <ng-template #giftsModal let-modal>
-    <div class="modal-wrapper">
-      <div class="modal-content">
-        <div class="modal-header">
-          <p class="modal-title">Quà đã nhận</p>
-        </div>
-        <button type="button" class="close-button" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <div class="modal-body">
-          <ul class="prize-list">
-            <li class="prize-item" *ngFor="let prize of receivedPrizes">
-              <img class="prize-image" [src]="'assets/images/prizes/'+prize.image" alt="{{ prize.image }}">
-              <div class="prize-details">
-                <p class="prize-name">{{ prize.prizeName }}</p>
-                <p class="prize-time">{{ prize.receivedTime }}</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </ng-template>
   <div class="footer-container">
     <div class="footer-buttons d-flex justify-content-around mt-4">
-      <button mat-raised-button color="accent" class="footer-button" (click)="viewReceivedPrizes(giftsModal)">
+      <button mat-raised-button color="accent" class="footer-button" (click)="viewReceivedPrizes()">
         <mat-icon>card_giftcard</mat-icon>
         Quà đã nhận
       </button>
