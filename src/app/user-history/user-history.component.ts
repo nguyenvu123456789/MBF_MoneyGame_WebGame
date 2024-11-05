@@ -39,7 +39,7 @@ export class UserHistoryComponent implements OnInit {
         msisdn: this.msisdn
       },
       sorting: {
-        direction: "",
+        direction: 1,
         field: "id"
       },
       paginated: true

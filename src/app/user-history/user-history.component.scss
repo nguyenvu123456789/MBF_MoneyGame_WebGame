@@ -16,7 +16,7 @@
   h2 {
     margin: 0;
     color: #333;
-    font-size: 1.5rem; /* Cỡ chữ tiêu đề chính */
+    font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
     flex-grow: 1;
@@ -51,16 +51,15 @@
   .mat-expansion-panel-header {
     background-color: #D0E9F4;
     font-weight: bold;
-    font-size: 1rem; /* Cỡ chữ tiêu đề của mỗi panel */
+    font-size: 1rem;
     color: #787575;
     padding: 12px;
-    border-bottom: 1px solid #ccc; /* Đường gạch ngang */
+    border-bottom: 2px solid #ffffff;
   }
 }
 
-/* Dấu gạch ngang chỉ hiển thị khi panel mở */
 .mat-expansion-panel.mat-expanded .mat-expansion-panel-header {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 2px solid #ffffff;
 }
 
 .date-day {
@@ -80,7 +79,7 @@
 
 .date-month-year {
   color: #787575;
-  font-size: 1rem; 
+  font-size: 0.9rem;
   vertical-align: middle;
 }
 
@@ -105,7 +104,7 @@
     .prize-name {
       color: #333;
       margin: 0;
-      font-size: 1rem; 
+      font-size: 1rem;
     }
 
     .time {

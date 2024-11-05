@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,6 +37,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     BrowserAnimationsModule,
     RouterModule,
     MatIconModule,
+    MatMenuModule,
     NgbModule,
     WheelOfFortuneModule,
     ShareModule,
