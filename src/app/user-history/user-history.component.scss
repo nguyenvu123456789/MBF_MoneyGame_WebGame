@@ -65,21 +65,21 @@
 .date-day {
   display: inline-block;
   background-color: #ffffff;
-  width: 48px;
-  height: 48px;
-  line-height: 48px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
   text-align: center;
   border-radius: 4px;
   font-weight: bold;
   color: #333;
   margin-right: 8px;
-  font-size: 1rem;
+  font-size: 0.875rem;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .date-month-year {
   color: #787575;
-  font-size: 0.9rem;
+  font-size: 1rem;
   vertical-align: middle;
 }
 
