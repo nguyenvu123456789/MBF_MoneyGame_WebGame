@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit{
               private fb: FormBuilder) {
   }
   login(): void {
-    // @ts-ignore
+    
     const {msisdn, password} = this.loginForm.value;
     this.authService.apiLogin(msisdn, password).subscribe((res) => {
       console.log("navigating.....")

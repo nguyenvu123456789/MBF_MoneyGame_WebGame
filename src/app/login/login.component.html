@@ -1,9 +1,16 @@
-<form [formGroup]="loginForm">
-
-<h2>Login</h2>
-<div>
-  Msisdn: <input type="text" formControlName="msisdn">
-  Password: <input type="password" formControlName="password">
-  <input type="submit" (click)="login()">
-</div>
+<form [formGroup]="loginForm" class="login-form">
+  <h2>Login</h2>
+  <div class="form-group">
+    <label for="msisdn">Msisdn:</label>
+    <input type="text" id="msisdn" formControlName="msisdn" class="form-control">
+  </div>
+  
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" id="password" formControlName="password" class="form-control">
+  </div>
+  
+  <div class="form-group">
+    <input type="submit" (click)="login()" class="submit-button" value="Login">
+  </div>
 </form>

@@ -22,14 +22,10 @@ export class UserHistoryComponent implements OnInit {
     private userHistoryService: UserHistoryService,
     private route: ActivatedRoute,
     private datePipe: DatePipe
-  ) {
-    
-
-  }
-
+  ) {}
   ngOnInit(): void {
     this.gameId = this.route.snapshot.params['gameId'];
-      this.fetchUserHistory();
+    this.fetchUserHistory();
   }
 
   fetchUserHistory(): void {
@@ -50,10 +46,8 @@ export class UserHistoryComponent implements OnInit {
     };
 
     this.userHistoryService.apiGetPrizesByUser(requestData).subscribe((response: any) => {
-      if (response.status === 200) {
         this.filteredHistory = response.body.data;
         this.groupHistoryByDate();
-      }
     });
   }
 
@@ -61,7 +55,6 @@ export class UserHistoryComponent implements OnInit {
     const groupedData = this.filteredHistory.reduce((acc, history) => {
       const modifiedAtDate = history.modifiedAt ? new Date(history.modifiedAt) : new Date();
       const date = modifiedAtDate.toDateString();
-
       if (!acc[date]) acc[date] = { date, items: [] };
       acc[date].items.push(history);
       return acc;

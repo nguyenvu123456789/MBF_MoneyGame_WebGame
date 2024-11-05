@@ -17,6 +17,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {DatePipe} from "@angular/common";
 import { ModalComponent } from './modal/modal.component';
 import {WheelOfFortuneModule} from "./wheel/wheel-of-fortune.module";
+import { ProfileComponent } from './pages/profile/profile.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import {WheelOfFortuneModule} from "./wheel/wheel-of-fortune.module";
     UserHistoryComponent,
     PlayGameComponent,
     LoginComponent,
-    ModalComponent
+    ModalComponent,
+    ProfileComponent,
   ],
   imports: [
     FormsModule,

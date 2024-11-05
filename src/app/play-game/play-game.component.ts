@@ -51,6 +51,7 @@ export class PlayGameComponent implements OnInit {
 
     this.getUserInfo(userLoggedIn.msisdn);
     this.getGame();
+    
   }
 
   getGame() {
@@ -111,7 +112,7 @@ export class PlayGameComponent implements OnInit {
   }
 
   viewHistory() {
-    this.router.navigate(['user-history']);
+    this.router.navigate(['user-history/'+this.game.id]);
   }
 
   doTaskLogin() {
