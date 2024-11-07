@@ -6,7 +6,7 @@
     <button type="button" class="close-button border-0 fs-3 rounded-circle text-secondary position-absolute" aria-label="Close" (click)="closeModal()">
       <span aria-hidden="true">&times;</span>
     </button>
-    <div class="modal-body p-2 w-100 mt-4">
+    <div class="modal-body p-2 w-100 mt-4 overflow-auto h-75">
       <div class="icon-container">
         <ng-container *ngIf="image; else iconTemplate">
         <div class="image-container">

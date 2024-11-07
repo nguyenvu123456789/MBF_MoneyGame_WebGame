@@ -238,7 +238,7 @@ export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
     const currentMinute = currentTime.getMinutes();
 
     if ((currentHour === 23 && currentMinute >= 1) || currentHour > 8) {
-      const modalRef = this.modalService.open(ModalComponent);
+      const modalRef = this.modalService.open(ModalComponent, {animation:false});
       modalRef.componentInstance.title = 'Thông báo';
       modalRef.componentInstance.message = 'Thời gian quay từ 08:00 đến 23:00 <br> Vui lòng quay lại sau!';
       modalRef.componentInstance.icon = 'info';
