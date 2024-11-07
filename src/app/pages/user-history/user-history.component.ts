@@ -16,15 +16,17 @@ export class UserHistoryComponent implements OnInit {
   startDate: Date | null = null;
   endDate: Date | null = null;
   gameId!: number;
-  msisdn = "0987654321";
+  msisdn!: string;
 
   constructor(
     private userHistoryService: UserHistoryService,
     private route: ActivatedRoute,
     private datePipe: DatePipe
   ) {}
+
   ngOnInit(): void {
     this.gameId = this.route.snapshot.params['gameId'];
+    this.msisdn = this.route.snapshot.params['msisdn'];
     this.fetchUserHistory();
   }
 

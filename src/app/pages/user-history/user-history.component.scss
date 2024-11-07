@@ -47,7 +47,6 @@
 
   .mat-expansion-panel-header {
     background-color: #D0E9F4;
-    font-weight: bold;
     font-size: 1rem;
     color: #787575;
     padding: 12px;
@@ -57,6 +56,7 @@
 
 .mat-expansion-panel.mat-expanded .mat-expansion-panel-header {
   border-bottom: 2px solid #ffffff;
+  
 }
 
 .date-day {
@@ -81,23 +81,22 @@
 }
 
 .history-item {
+  margin-top: 7px;
   display: flex;
   align-items: center;
-  padding: 8px;
-  margin: 4px 16px;
   background-color: #D0E9F4;
   border-radius: 4px;
 
   .history-icon {
     width: 32px;
     height: 32px;
-    margin-right: 8px;
+
   }
 
   .history-content {
     display: flex;
     flex-direction: column;
-
+    margin-left: 6px;
     .prize-name {
       color: #333;
       margin: 0;

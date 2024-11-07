@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'play', component: PlayGameComponent,  canActivate: [AuthGuard] },
-  {path: 'user-history/:gameId', component: UserHistoryComponent, canActivate: [AuthGuard] },
+  {path: 'user-history/:gameId/:msisdn', component: UserHistoryComponent, canActivate: [AuthGuard] },
   {path: '', component:LoginComponent}
 ];
 
