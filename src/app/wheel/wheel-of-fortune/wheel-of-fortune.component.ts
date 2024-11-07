@@ -11,6 +11,8 @@ import { Sector } from '../sector.model';
 import { GameHistoryService } from 'src/app/services/data/game-history.service';
 import { AuthService } from 'src/app/services/data/auth.service';
 import { AppComponent } from 'src/app/app.component';
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ModalComponent} from "../../modal/modal.component";
 
 const EMPTY_SECTOR: Sector = {
   id: '',
@@ -52,7 +54,8 @@ export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
   constructor(
     private gh: GameHistoryService,
     private authService: AuthService,
-    protected appComponent: AppComponent
+    protected appComponent: AppComponent,
+    protected modalService:NgbModal
   ) {}
 
   ngAfterViewInit(): void {
@@ -230,6 +233,18 @@ export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
   }
 
   spin() {
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+    const currentMinute = currentTime.getMinutes();
+
+    if ((currentHour === 23 && currentMinute >= 1) || currentHour > 8) {
+      const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.title = 'Thông báo';
+      modalRef.componentInstance.message = 'Thời gian quay từ 08:00 đến 23:00 <br> Vui lòng quay lại sau!';
+      modalRef.componentInstance.icon = 'info';
+      return;
+    }
+
     if (this.angVel) {
       return;
     }
@@ -246,8 +261,12 @@ export class WheelOfFortuneComponent implements AfterViewInit, OnChanges {
           }
         },
         error: (err) => {
+          // const modalRef = this.modalService.open(ModalComponent);
+          // modalRef.componentInstance.title="Thông báo";
+          // modalRef.componentInstance.messages=err.message;
+          // modalRef.componentInstance.icon="error_outline"
           this.appComponent.showAlert('danger', err);
-          console.log('err', err);
+          // console.log('err', JSON.stringify(err));
         },
       });
   }
